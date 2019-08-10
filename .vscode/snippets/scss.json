@@ -1,0 +1,151 @@
+{
+    "Comment Partial Heading": {
+        "prefix": "comment-partial-heading",
+        "body": [
+            "/* =============================================================================",
+            "   ${1:FILE-NAME} (${2:<layer-name>}/_${3:<partial-name>}.scss)",
+            "   ========================================================================== */",
+            "$0"
+        ],
+        "description": "Partial heading comment block."
+    },
+    "Comment Section": {
+        "prefix": "comment-section",
+        "body": [
+            "/* =============================================================================",
+            "   ${1:Section comment block}",
+            "   ========================================================================== */",
+            "$0"
+        ],
+        "description": "Section comment block."
+    },
+    "Comment Sub-Section": {
+        "prefix": "comment-sub-section",
+        "body": [
+            "/* ${1:Sub-section comment block}",
+            "   ========================================================================== */",
+            "$0"
+        ],
+        "description": "Sub-Section comment block."
+    },
+    "Comment Short Description": {
+        "prefix": "comment-short-description",
+        "body": [
+            "/**",
+            " * ${1:Short description using Doxygen-style comment format",
+            " *",
+            " * The first sentence of the long description starts here and continues on this",
+            " * line for a while finally concluding here at the end of this paragraph.",
+            " *",
+            " * The long description is ideal for more detailed explanations and",
+            " * documentation. It can include example HTML, URLs, or any other information",
+            " * that is deemed necessary or useful.}",
+            " */",
+            "$0"
+        ],
+        "description": "Short description comment block."
+    },
+    "Comment Basic": {
+        "prefix": "comment-basic",
+        "body": [
+            "/* ${1:Basic comment block} */",
+            "$0"
+        ],
+        "description": "Basic comment block."
+    },
+    "Comment Number Flag": {
+        "prefix": "comment-number-flag",
+        "body": [
+            "/* [${1:1}] */$0"
+        ],
+        "description": "Number flag comment block."
+    },
+    "Color": {
+        "prefix": "color",
+        "body": [
+            "color(${1:extra}, ${2:red})$0"
+        ],
+        "description": "Color function."
+    },
+    "Color Darken": {
+        "prefix": "color-darken",
+        "body": [
+            "color-darken(${1:extra}, ${2:red})$0"
+        ],
+        "description": "Color darken function."
+    },
+    "Color Lighten": {
+        "prefix": "color-lighten",
+        "body": [
+            "color-lighten(${1:extra}, ${2:red})$0"
+        ],
+        "description": "Color lighten function."
+    },
+    "Media Breakpoint Up": {
+        "prefix": "media-breakpoint-up",
+        "body": [
+            "@include media-breakpoint-up(${1:md}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Media breakpoint-up mixin."
+    },
+    "Media Breakpoint Down": {
+        "prefix": "media-breakpoint-down",
+        "body": [
+            "@include media-breakpoint-down(${1:md}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Media breakpoint-down mixin."
+    },
+    "Stylelint Disable": {
+        "prefix": "stylelint-disable",
+        "body": [
+            "/* stylelint-disable */$0"
+        ],
+        "description": "All rules will be turned off below this flag."
+    },
+    "Stylelint Enable": {
+        "prefix": "stylelint-enable",
+        "body": [
+            "/* stylelint-enable */$0"
+        ],
+        "description": "All rules will be turned on below this flag."
+    },
+    "Stylelint Disable Individual Rule": {
+        "prefix": "stylelint-disable-individual-rule",
+        "body": [
+            "/* stylelint-disable ${1:declaration-no-important} */$0"
+        ],
+        "description": "Individual rules will be turned off below this flag."
+    },
+    "Stylelint Disable Line": {
+        "prefix": "stylelint-disable-line",
+        "body": [
+            "/* stylelint-disable-line */$0"
+        ],
+        "description": "Turn off rules for individual lines only."
+    },
+    "Stylelint Disable Individual Rule on Line": {
+        "prefix": "stylelint-disable-individual-rule-on-line",
+        "body": [
+            "/* stylelint-disable-line ${1:declaration-no-important} */$0"
+        ],
+        "description": "Turn off rules for individual rules on specific lines only."
+    },
+    "Stylelint Disable Next Line": {
+        "prefix": "stylelint-disable-next-line",
+        "body": [
+            "/* stylelint-disable-next-line */$0"
+        ],
+        "description": "Turn off rules for the next line only."
+    },
+    "Stylelint Disable Individual Rule on Next Line": {
+        "prefix": "stylelint-disable-individual-rule-on-next-line",
+        "body": [
+            "/* stylelint-disable-next-line ${1:declaration-no-important} */$0"
+        ],
+        "description": "Turn off individual rule for the next line only."
+    }
+}

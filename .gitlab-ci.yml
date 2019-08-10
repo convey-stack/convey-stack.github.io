@@ -1,0 +1,18 @@
+image: ruby:2.3
+
+variables:
+  JEKYLL_ENV: production
+  LC_ALL: "C.UTF-8"
+  LANG: "en_US.UTF-8"
+  LANGUAGE: "en_US.UTF-8"
+
+pages:
+  stage: deploy
+  script:
+  - gem install jekyll
+  - jekyll build -d public/
+  artifacts:
+    paths:
+    - public
+  only:
+  - master

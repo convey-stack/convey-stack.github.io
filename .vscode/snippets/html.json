@@ -1,0 +1,29 @@
+{
+    "Container": {
+        "prefix": "o-container",
+        "body": [
+            "<div class=\"o-container\">",
+            "    <div class=\"o-row\">",
+            "        <div class=\"o-col-12\">$0</div><!-- /.o-col -->",
+            "    </div><!-- /.o-row -->",
+            "</div><!-- /.o-container -->"
+        ],
+        "description": "Container with row and column objects."
+    },
+    "Row": {
+        "prefix": "o-row",
+        "body": [
+            "<div class=\"o-row\">",
+            "    <div class=\"o-col-12\">$0</div><!-- /.o-col -->",
+            "</div><!-- /.o-row -->"
+        ],
+        "description": "Row and column objects."
+    },
+    "Column": {
+        "prefix": "o-column",
+        "body": [
+            "<div class=\"o-col-12\">$0</div><!-- /.o-col -->"
+        ],
+        "description": "Column object."
+    }
+}
