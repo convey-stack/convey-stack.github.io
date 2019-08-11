@@ -12,7 +12,7 @@ hero:
 
 # Welcome to Convey
 
-Convey is a set of **helper libraries** that can be most of the time (with some exceptions) **used independently of each other** in order to help you to build your web applications and micro services. **Convey is neither a framework, nor a silver bullet**. 
+Convey is a set of **helper libraries** that can be most of the time (with some exceptions) **used independently of each other** to help you to build your web applications and microservices. **Convey is neither a framework nor a silver bullet**. 
 
 Quite opposite, **it's mostly the set of extensions methods along with additional abstractions** that will help you to deal with common infrastructural concerns such as routing, service discovery, load balancing, tracing, asynchronous messaging and so on.
 

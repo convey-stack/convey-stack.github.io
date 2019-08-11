@@ -12,7 +12,7 @@ hero:
     background_image: # Paste image URL to display image in background of hero section
     buttons: # Add buttons below, there are examples with all available options
         - label: Getting started
-          url: /documentation
+          url: /documentation/getting-started/
           external_url: false # Set to "false" if you're pointing to inner page
           style: filled # Choose style: "filled" or "bordered"
           icon: edit
