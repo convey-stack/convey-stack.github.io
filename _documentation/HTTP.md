@@ -1,13 +1,13 @@
 ---
 title: HTTP
-description: HTTP
+description: Requests, service discovery, load balancing.
 keywords:
 order: 3
 comments: false
 
 hero:
     title: HTTP
-    text: HTTP
+    text: Requests, service discovery, load balancing.
 ---
 
 ## Overview

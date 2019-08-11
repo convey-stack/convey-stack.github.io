@@ -1,13 +1,13 @@
 ---
 title: Logging
-description: Logging
+description: Centralized logging with Serilog and Seq.
 keywords:
 order: 6
 comments: false
 
 hero:
     title: Logging
-    text: Logging
+    text: Centralized logging with Serilog and Seq.
 ---
 
 ## Overview

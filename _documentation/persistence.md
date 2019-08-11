@@ -1,13 +1,13 @@
 ---
 title: Persistence
-description: Persistence
+description: MongoDB and Redis storage. 
 keywords:
 order: 10
 comments: false
 
 hero:
     title: Persistence
-    text: Persistence
+    text: MongoDB and Redis storage.
 ---
 
 ## MongoDB

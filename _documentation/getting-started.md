@@ -1,13 +1,13 @@
 ---
 title: Getting started
-description: Getting started
+description: Introduction to Convey.
 keywords:
 order: 0
 comments: false
 
 hero:
     title: Getting started
-    text: Getting started
+    text: Introduction to Convey.
 ---
 
 # Welcome to Convey

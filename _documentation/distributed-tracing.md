@@ -1,13 +1,13 @@
 ---
 title: Distributed tracing
-description: Distributed tracing
+description: Tracing distributed processes with Jaeger.
 keywords:
 order: 8
 comments: false
 
 hero:
     title: Distributed tracing
-    text: Distributed tracing
+    text: Tracing distributed processes with Jaeger.
 ---
 
 ## Overview

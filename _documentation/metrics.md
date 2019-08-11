@@ -1,13 +1,13 @@
 ---
 title: Metrics
-description: Metrics
+description: AppMetrics, Grafana and Prometheus.
 keywords:
 order: 7
 comments: false
 
 hero:
     title: Metrics
-    text: Metrics
+    text: AppMetrics, Grafana and Prometheus.
 ---
 
 ## Overview

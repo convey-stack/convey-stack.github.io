@@ -1,17 +1,17 @@
 ---
 title: Configuration
-description: Configuration
+description: Secure configuration using Vault.
 keywords:
 order: 9
 comments: false
 
 hero:
     title: Configuration
-    text: Configuration
+    text: Secure configuration using Vault.
 ---
 
 ## Vault
-Adds the secured and centralized configuration storage integration with the usage of [Vault](https://www.vaultproject.io).
+Adds the secured and centralized configuration storage integration using [Vault](https://www.vaultproject.io).
 
 ## Installation
 `dotnet add package Convey.Configurations.Vault`

@@ -1,19 +1,19 @@
 ---
 title: CQRS
-description: CQRS
+description: Command, queries and event handlers.
 keywords:
 order: 1
 comments: false 
 
 hero:
     title: CQRS
-    text: CQRS
+    text: Command, queries and event handlers.
 ---
 
 
 ## Commands
 ### Overview
-Adds ability to create and process **commands** in the sense of [CQRS](https://martinfowler.com/bliki/CQRS.html). 
+Adds an ability to create and process **commands** in the sense of [CQRS](https://martinfowler.com/bliki/CQRS.html). 
 
 ### Installation
 `dotnet add package Convey.CQRS.Commands`
