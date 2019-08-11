@@ -48,10 +48,9 @@ public class SomeService
 }
 ```
 
-In order to use `IMongoRepository` abstraction, invoke `AddMongoRepository<TDocument, TIdentifiable>("collectionName")` for each document that you would like to be able to access with this repository abstraction.
+In order to use `IMongoRepository` abstraction, invoke `AddMongoRepository<TDocument, TIdentifiable>("collectionName")` for each document that you would like to be able to access with this repository abstraction and ensure that document type implements `IIdentifiable` interface.
 
-
-By using the provided `IMongoRepository` you can access helper methods such as `AddAsync()`, `BrowseAsync()` etc. instead of relying on the default `IMongoDatabase` abstraction available via [MongoDB.Driver](https://docs.mongodb.com/ecosystem/drivers/csharp/).
+By using the provided `IMongoRepository` you can access helper methods such as `AddAsync()`, `BrowseAsync()` etc. instead of relying on `IMongoDatabase` abstraction available via [MongoDB.Driver](https://docs.mongodb.com/ecosystem/drivers/csharp/).
 
 
 ```csharp
@@ -67,7 +66,7 @@ public class SomeService
 ```
 
 ## Options
-* `connectionString` - connection string of MongoDB e.g. `mongodb://localhost:27017`.
+* `connectionString` - connection string e.g. `mongodb://localhost:27017`.
 * `database` - database name.
 * `seed` - boolean value, if `true` then `IMongoDbSeeder.SeedAsync()` will be invoked (if implemented).
 
@@ -107,7 +106,7 @@ public static IConveyBuilder RegisterConvey(this IConveyBuilder builder)
 }
 ```
 
-In order to use Redis integration, simply inject built-in `IDistributedCache` interface.
+In order to use Redis integration, inject built-in `IDistributedCache` interface.
 
 ```csharp
 public class SomeService
@@ -122,8 +121,8 @@ public class SomeService
 ```
 
 ## Options
-* `connectionString` - connection string of Redis e.g. `localhost`.
-* `instance` - optional prefix, that will be added by default to all the keys stored in Redis.
+* `connectionString` - connection string e.g. `localhost`.
+* `instance` - optional prefix, that will be added by default to all the keys.
 
 ### appsettings.json
 
