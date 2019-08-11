@@ -1,13 +1,13 @@
 ---
 title: CQRS
-description: Command, queries and event handlers.
+description: Commands, queries and event handlers.
 keywords:
 order: 1
 comments: false 
 
 hero:
     title: CQRS
-    text: Command, queries and event handlers.
+    text: Commands, queries and event handlers.
 ---
 
 
@@ -22,7 +22,7 @@ Adds an ability to create and process **commands** in the sense of [CQRS](https:
 * [Convey](https://www.nuget.org/packages/Convey)
 
 ### Usage
-Implement ``ICommand`` (marker) interface in the selected class. Since the command represents user's intention you should follow the convention:
+Implement ``ICommand`` (marker) interface in the selected class. Since the command represents the user's intention you should follow the convention:
 
 * keep all the commands **immutable**
 * name of your commands should be **imperative**
@@ -104,7 +104,7 @@ public class AccountsService
 
 ## Queries
 ### Overview
-Adds ability to create and process **queries** in the sense of [CQRS](https://martinfowler.com/bliki/CQRS.html). 
+Adds an ability to create and process **queries** in the sense of [CQRS](https://martinfowler.com/bliki/CQRS.html). 
 
 ### Installation
 `dotnet add package Convey.CQRS.Queries`
@@ -195,7 +195,7 @@ Adds ability to create and process **events** in the sense of [CQRS](https://mar
 Implement ``IEvent`` or ``IRejectedEvent`` (marker) interface in the selected class. Since the event represents something that already happened, you should follow the convention:
 
 * keep all the events **immutable**
-* name of your events should kept in **past tense**
+* name of your events should kept in the **past tense**
 
 ```csharp
 public class AccountCreated : IEvent
