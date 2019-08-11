@@ -71,7 +71,7 @@ Convey exteds [RawRabbitConfiguration](https://rawrabbit.readthedocs.io/en/maste
 ```
 
 
-## Usage
+### Usage
 Inside `Startup.cs` extend `IConveyBuilder` with `AddRabbitMq<TContext>()` that will register the required services. 
 
 ```csharp
@@ -86,7 +86,7 @@ public IServiceProvider ConfigureServices(this IServiceCollection services)
 }
 ```
 
-Note that registration method requires `TContext` generic parameter. Given type must implement `ICorrelationContext` interface provided by Convey and it's used for correlating set of messages that have been sent all across the application during single HTTP request.
+Note that registration method requires `TContext` generic parameter. Given type must implement `ICorrelationContext` interface provided by Convey and it's used for correlating set of messages that have been sent all across the application during single a HTTP request.
 
 The above registration creates a unique connection to RabbitMQ and registers services required for publishing and subscribing the messages.
 
@@ -133,7 +133,7 @@ The given message is published to an **exchange** with the following conventions
 * `Exchange name` - `{namespace}` or value passed in the `MessageNamespaceAttribute`
 * `Message routing key` - `{namespace}.{messageName}`or `{valueFromMessageNamespaceAttribute}.{messageName}`
 
-Thus if you use Convey withing just **one application** the only, required parameter to make publish/subscribe work is a `namespace` parameter inside `appsettings.json`. Once you communicate **multiple, indepndent apps (like microservices)** `MessageNamespaceAttribute` is necessary on the publisher side to send a message to the correct exchange with correct message routing key.
+Thus if you use Convey withing just **one application** the only, required parameter to make publish/subscribe work is a `namespace` parameter inside `appsettings.json`. Once you communicate **multiple, independent apps (like microservices)** `MessageNamespaceAttribute` is necessary on the publisher side to send a message to the correct exchange with correct message routing key.
 
 ```csharp
 [MessageNamespace("parcels")]
@@ -146,12 +146,12 @@ public class CreateParcel
 The above message will be published to `parcels` exchange with `parcels.create_parcels` routing key. If no attribute is specified then `namespace` parameter from `appsettings.json` is used instead.
 
 ### Error handling
-During message processing there might be a chance that exception will be thrown. We can distinguish two types of exceptions:
+During message processing there might be a chance that an exception will be thrown. We can distinguish two types of exceptions:
 
-* `domain exception` - informs that message cannot be further processed due to some doman logic like. `PasswordToShortException`
+* `domain exception` - informs that message cannot be further processed due to some domain logic like. `PasswordToShortException`
 * `infrastructure exception` - informs that message cannot be further processed due to infrastructure issues like. connecting to database etc.
 
-In first scenario it's better not to retry the processing (wrong password is not going to be better once we try again). n the second one, we can try a few times before we give up. Convey allows you to add this type of error handling using simple mapper.Create a class that implements `IExceptionToMessageMapper` interface and register it in `IConveyBuilder`:
+In the first scenario, it's better not to retry the processing (wrong password is not going to be better once we try again). n the second one, we can try a few times before we give up. Convey allows you to add this type of error handling using a simple mapper. Create a class that implements `IExceptionToMessageMapper` interface and register it in `IConveyBuilder`:
 
 ```csharp
 public class ExceptionToMessageMapper : IExceptionToMessageMapper
@@ -181,12 +181,12 @@ public IServiceProvider ConfigureServices(this IServiceCollection services)
 }
 ```
 
-If an exception will be thrown during message processing, a mapper is used to produce another message that will be automaticly published to RabbitMQ. If exception->message mapping is not be defined, **retry** is going to be performed according to parameters provided in `appsettings.json`.   
+If an exception will be thrown during message processing, a mapper is used to produce another message that will be automatically published to RabbitMQ. If exception->message mapping is not be defined, **retry** is going to be performed according to parameters provided in `appsettings.json`.   
 
 ### Message processors
 
 ## CQRS integration
-Convey allows you to integrate asynchronous communication via RabbitMQ with CQRS principle providing 
+Convey allows you to integrate asynchronous communication via RabbitMQ with CQRS principle providing set of extension methods for publishing/subscribing **commands** and **events**. 
 
 ## Jaeger integration
 
