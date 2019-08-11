@@ -36,10 +36,6 @@ public static IConveyBuilder RegisterConvey(this IConveyBuilder builder)
 }
 ```
 
-In order to use `IMongoRepository` abstraction, invoke `AddMongoRepository<TDocument, TIdentifiable>("collectionName") for each document like that you would like to be able to use with this interface.
-
-By using the provided `IMongoRepository` you can access helper methods such as `AddAsync()`, `BrowseAsync()` etc. instead of relying on the default `IMongoDatabase` abstraction available via [MongoDB.Driver](https://docs.mongodb.com/ecosystem/drivers/csharp/).
-
 ```csharp
 public class SomeService
 {
@@ -51,6 +47,12 @@ public class SomeService
     }
 }
 ```
+
+In order to use `IMongoRepository` abstraction, invoke `AddMongoRepository<TDocument, TIdentifiable>("collectionName")` for each document that you would like to be able to access with this repository abstraction.
+
+
+By using the provided `IMongoRepository` you can access helper methods such as `AddAsync()`, `BrowseAsync()` etc. instead of relying on the default `IMongoDatabase` abstraction available via [MongoDB.Driver](https://docs.mongodb.com/ecosystem/drivers/csharp/).
+
 
 ```csharp
 public class SomeService
