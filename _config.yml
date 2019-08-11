@@ -25,7 +25,7 @@ dox:
             image:
         text: Copyright &copy; 2019. - Convey <br>All rights reserved.
     google_analytics:
-        tracking_code: # Add your Google Analytics tracking code to activate Google Analytics
+        tracking_code: UA-145434197-1
     comments:
         disqus_forum_shortname: # Add your Disqus forum shortname to activate comments site-wide
 
