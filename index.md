@@ -7,61 +7,65 @@ keywords: # Define keywords for search engines
 
 # Hero section
 hero:
-    title: Hero section — Title
-    text: Hero section — Text
+    title: Convey
+    text: A simple recipe for .NET Core microservices.
     background_image: # Paste image URL to display image in background of hero section
     buttons: # Add buttons below, there are examples with all available options
-        - label: Button — Filled with icon
-          url: http://example.com
-          external_url: true # Set to "false" if you're pointing to inner page
-          style: filled # Choose style: "filled" or "bordered"
-          icon: github # Choose from 266 icons in "Feather" icon set, list of all icons is available here - https://feathericons.com
-        - label: Button — Bordered with icon
+        - label: Getting started
           url: /documentation
-          external_url: false
+          external_url: false # Set to "false" if you're pointing to inner page
+          style: filled # Choose style: "filled" or "bordered"
+          icon: edit
+        - label: Browse repository
+          url: https://github.com/convey-stack
+          external_url: true
           style: bordered
-          icon: gitlab
-    download_link: # Set small download link placed below buttons
-        label: Download — v4.0.0
-        url: https://example.com
+          icon: github
 
 # Features section
 features:
     rows: # Add feature rows below, there are examples with all available options
-        - title: Features row 1 — Title
-          description: Features row 1 — Description
+        - title: What is Convey and what is not?
+          description: 'Convey is a set of helper libraries that can be used independently of each other to help you to build your web applications and microservices, yet it is neither a framework nor a silver bullet. Convey does provide utilities to tackle challenges such as messaging, service discovery, load balancing, secure configuration, monitoring, distributed tracing and many more.'
           grid: # Add feature grid items below, there are examples with all available options
-              - title: Feature 1 — Title
-                description: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident iste voluptas sunt eligendi sit dolorem blanditiis nostrum, fuga ducimus enim? Ut temporibus.
-                icon: box # Choose from 266 icons in "Feather" icon set, list of all icons is available here - https://feathericons.com
-              - title: Feature 2 — Title
-                description: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident iste voluptas sunt eligendi sit dolorem blanditiis nostrum, fuga ducimus enim? Ut temporibus.
+              - title: Lightweight
+                description: Convey packages are very light both, in terms of size and external dependencies and can be used in any .NET Core application.
+                icon: box
+              - title: Modular
+                description: Multiple packages can be used together to tackle different concerns as well as used independently of each other.
                 icon: server
-              - title: Feature 3 — Title
-                description: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident iste voluptas sunt eligendi sit dolorem blanditiis nostrum, fuga ducimus enim? Ut temporibus.
+              - title: Simple
+                description: Simplicity is the key to build small and reusable packages, thus you can easily fork our repositories and create the custom extensions.
                 icon: cpu
-        - title: Features row 2 — Title
-          description: Features row 2 — Description
-          grid:
-              - title: Feature 1 — Title
-                description: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident iste voluptas sunt eligendi sit dolorem blanditiis nostrum, fuga ducimus enim? Ut temporibus.
-                icon: git-branch
-              - title: Feature 2 — Title
-                description: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident iste voluptas sunt eligendi sit dolorem blanditiis nostrum, fuga ducimus enim? Ut temporibus.
-                icon: git-commit
-              - title: Feature 3 — Title
-                description: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident iste voluptas sunt eligendi sit dolorem blanditiis nostrum, fuga ducimus enim? Ut temporibus.
-                icon: git-merge
+
     footer: # Set features section footer variables
-        title: Features footer — Title
-        description: Features footer — Description
+        title: Other projects
+        description: Watch our free course about building microservices and take a look at other projects.
         buttons: # Add buttons below, there are examples with all available options
-            - label: Button — Filled
+            - label: Distributed .NET Core
+              url: https://devmentors.io/distributed-net-core/
+              external_url: true # Set to "false" if you're pointing to inner page
+              style: filled # Choose style: "filled" or "bordered"
+              icon: # Choose from 266 icons in "Feather" icon set, list of all icons is available here - https://feathericons.com            
+            - label: Chronicle
+              url: https://github.com/chronicle-stack/chronicle
+              external_url: true # Set to "false" if you're pointing to inner page
+              style: bordered # Choose style: "filled" or "bordered"
+              icon: # Choose from 266 icons in "Feather" icon set, list of all icons is available here - https://feathericons.com
+            - label: Ntrada
+              url: https://github.com/Ntrada/Ntrada
+              external_url: true
+              style: bordered
+              icon:
+---
+
+        buttons: # Add buttons below, there are examples with all available options
+            - label: Chronicle
               url: http://example.com
               external_url: true # Set to "false" if you're pointing to inner page
               style: filled # Choose style: "filled" or "bordered"
               icon: # Choose from 266 icons in "Feather" icon set, list of all icons is available here - https://feathericons.com
-            - label: Button — Bordered
+            - label: Ntrada
               url: /documentation
               external_url: false
               style: bordered
