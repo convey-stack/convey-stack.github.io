@@ -68,7 +68,7 @@ Convey exteds [RawRabbitConfiguration](https://rawrabbit.readthedocs.io/en/maste
       "exclusive": false
     }
   }
-``
+```
 
 
 ## Usage
@@ -167,10 +167,21 @@ public class ExceptionToMessageMapper : IExceptionToMessageMapper
     }
 }
 
+// Startup.cs
 
+public IServiceProvider ConfigureServices(this IServiceCollection services)
+{
+    var builder = ConveyBuilder
+        .Create(services)
+        .AddRabbitMq<CorrelationContext>()
+        .AddExceptionToMessageMapper<ExceptionToMessageMapper>();
+
+    //other registrations    
+    return builder.Build();
+}
 ```
 
-If an exception will be thrown during message processing, a mapper is going to be used to produce another message that will be automaticly published to RabbitMQ. If no  
+If an exception will be thrown during message processing, a mapper is used to produce another message that will be automaticly published to RabbitMQ. If exception->message mapping is not be defined, **retry** is going to be performed according to parameters provided in `appsettings.json`.   
 
 ### Message processors
 
