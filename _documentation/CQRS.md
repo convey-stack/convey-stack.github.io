@@ -8,8 +8,8 @@ comments: false # Set to "true" in order to enable comments on this page. Make s
 
 # Hero section
 hero:
-    title: CQRS — Title
-    text: CQRS — Text
+    title: CQRS
+    text: CQRS
 ---
 
 
