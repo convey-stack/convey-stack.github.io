@@ -1,0 +1,55 @@
+---
+title: Getting started
+description: Getting started
+keywords:
+order: 0
+comments: false
+
+hero:
+    title: Getting started
+    text: Getting started
+---
+
+# Welcome to Convey
+
+Convey is a set of **helper libraries** that can be most of the time (with some exceptions) **used independently of each other** in order to help you to build your web applications and micro services. **Convey is neither a framework, nor a silver bullet**. 
+
+Quite opposite, **it's mostly the set of extensions methods along with additional abstractions** that will help you to deal with common infrastructural concerns such as routing, service discovery, load balancing, tracing, asynchronous messaging and so on.
+
+In order to find out how you can **use Convey in a real-world scenarios,** take a look at the sample projects available on our [DevMentors.io](https://devmentors.io) GitHub [organization](https://github.com/devmentors). There are 3 projects for now: 
+
+* **[Pacco](https://github.com/devmentors/Pacco)** - the most advanced one, tackling the exclusive parcels' delivery domain, consisting of about 10 microservices
+* **[NPost](https://github.com/devmentors/NPost)** - only a few services, and rather simple parcel delivery domain 
+* **[DShop](https://github.com/devmentors/DNC-DShop)** - doesn't use Convey, but instead contains the so-called **Common** project which was one of the reasons why we started building Convey (by splitting up into smaller, independent pieces a single shared library).
+
+And if you're looking for the resources about building microservices with .NET Core, **check out our free course** available on YouTube (almost 20 hours) titled [Distributed .NET Core](https://devmentors.io/distributed-net-core).
+
+Feel free to take a look at **our other projects** that you might find useful when building the distributed services:
+
+* **[Chronicle](https://github.com/chronicle-stack/chronicle)** - a simple process manager/saga pattern implementation for .NET Core that helps you manage long-living and distributed transactions.
+* **[Ntrada](https://github.com/Ntrada/Ntrada)** - API Gateway built with .NET Core, that can be easily configured with yaml files and doesn't require additional coding whatsoever.
+
+## Getting started
+
+In order to get started with Convey, simply install the core package:
+
+`dotnet add package Convey`
+
+Its sole responsibility is to expose `IConveyBuilder` being used by other packages, which provides fluent API experience, similar to built-in ASP.NET Core `IServiceCollection` and `IApplicationBuilder` abstractions.
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+        => await WebHost.CreateDefaultBuilder(args)
+            .ConfigureServices(services => services.AddConvey().Build())
+            .Configure(app =>
+            {
+                //Configure the middleware
+            })
+            .Build()
+            .RunAsync();
+}
+```
+
+Whether you're using just a `Program.cs` on its own (yes, **you can build your web applications and microservices without a need of having `Startup` class and `AddMvc()` along with full `UseMvc()` middleware**) or doing it with a `Startup.cs` included, just invoke `AddConvey()` on `IServiceCollection` instance within the `ConfigureServices()` method and start using Convey packages.
