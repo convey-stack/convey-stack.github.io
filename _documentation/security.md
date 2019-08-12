@@ -61,9 +61,11 @@ public class UserService
     
     public async Task<string> SignInAsync(string email, string password)
     {
-        var user = await _db.Users.GetAsync(email); //Fetch user from a custom database
+        var user = ... //Fetch user from a custom database
         ValidateCredentials(user, password); //Validate the credentials
-        var token = _jwtHandler.CreateToken(user.Id, user.Role, user.Claims); //Generate the token with an optional role and other claims
+
+        //Generate the token with an optional role and other claims
+        var token = _jwtHandler.CreateToken(user.Id, user.Role, user.Claims); 
 
         return token.AccessToken;
     }
