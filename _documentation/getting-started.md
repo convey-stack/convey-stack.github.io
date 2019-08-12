@@ -53,3 +53,17 @@ public class Program
 ```
 
 Whether you're using just a `Program.cs` on its own (yes, **you can build your web applications and microservices without a need of having `Startup` class and `AddMvc()` along with full `UseMvc()` middleware**) or doing it with a `Startup.cs` included, just invoke `AddConvey()` on `IServiceCollection` instance within the `ConfigureServices()` method and start using Convey packages.
+
+The core Convey package also registers `AppOptions` type which contains the application name (and it's purely optional).
+
+## Options
+* `name` - an optional name of the application.
+* `displayBanner` - display a banner (console output) with the application name during a startup, `true` by default.
+
+### appsettings.json
+
+```js
+"app": {
+  "name": "some service",
+  "displayBanner": true
+}
