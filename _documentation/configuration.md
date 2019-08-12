@@ -32,6 +32,7 @@ public static IWebHostBuilder GetWebHostBuilder(string[] args)
 ```
 
 ## Options
+* `enabled` - determines whether Vault integration is going to be available.
 * `url` - URL of the Vault service.
 * `key` - path (an endpoint) to the configuration that will be loaded as a JSON during the application startup from Vault.
 * `authType` - authentication type, possible values: `token`, `userpass`.

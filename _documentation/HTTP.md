@@ -115,6 +115,7 @@ public static IApplicationBuilder UseConvey(this IApplicationBuilder app)
 ```
 
 ## Options
+* `enabled` - determines whether Consul integration is going to be available.
 * `url` - URL of the Consul service.
 * `service` - name of the service group (multiple instances of the same service will use the same `service` name).
 * `address` - address of the service.
@@ -171,6 +172,7 @@ public static IConveyBuilder RegisterConvey(this IConveyBuilder builder)
 ```
 
 ## Options
+* `enabled` - determines whether Fabio integration is going to be available.
 * `url` - URL of the Fabio service.
 * `service` - name of the service group used for the Consul registration.
 

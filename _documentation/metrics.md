@@ -22,10 +22,10 @@ Adds capability of generating application metrics and exposing them via HTTP end
 
 
 ## Options
-* `enabled` - detemines whether metrics endpoint is goint to be available.
+* `enabled` - determines whether metrics endpoint is going to be available.
 * `influxEnabled` - if `true` metrics will be reported to [InfluxDB](https://www.influxdata.com/).
-* `prometheusEnabled` - if `true` metrics will be formated using [Prometheus](https://prometheus.io/) data model.
-* `prometheusFormatter` - if set to `protobuf` then protobuf output formatter is going to be used. Otherwise text output formater is picked.
+* `prometheusEnabled` - if `true` metrics will be formatted using [Prometheus](https://prometheus.io/) data model.
+* `prometheusFormatter` - if set to `protobuf` then protobuf output formatter is going to be used. Otherwise, text output formatter is picked.
 * `InfluxUrl` - connection string to InfluxDB instance e.g. `http://localhost:8086`. Required only if `influxEnabled` is `true`.
 * `database` - InfluxDB database name. Required only if `influxEnabled` is `true`.
 * `interval` - InfluxDB flush interval expressed in seconds. Required only if `influxEnabled` is `true`.
@@ -65,11 +65,11 @@ public void Configure(this IApplicationBuilder app)
 ```
 The above code registers all required services and exposes some default application metrics at two HTTP endpoints:
 
-* `http://host/metrics` - depending on `prometheusEnabled` option, this endpoint exposes metrics that are either formatted using Prometheus data model or using standard, text formater
-* `http://host/metrics-text` - this endpoint exposes metrics that are always formated using standard, text formater
+* `http://host/metrics` - depending on `prometheusEnabled` option, this endpoint exposes metrics that are either formatted using Prometheus data model or using standard, text formatter
+* `http://host/metrics-text` - this endpoint exposes metrics that are always formated using standard, text formatter
 
 ### Creating custom metrics
-Once you finish Convey registration, you can create custom application metrics using [AppMetrics](https://www.app-metrics.io/) library for .NET Core. There are six different metrics types you can use:
+Once you finish Convey registration, you can create custom application metrics using the [AppMetrics](https://www.app-metrics.io/) library for .NET Core. There are six different metrics types you can use:
 
 * [Gauges](https://www.app-metrics.io/getting-started/metric-types/gauges/)
 * [Counters](https://www.app-metrics.io/getting-started/metric-types/counters/)
