@@ -51,9 +51,9 @@ public static IWebHostBuilder GetWebHostBuilder(string[] args)
                 .Post<AddParcel>("parcels", (req, ctx) => ctx.Response.Created($"parcels/{req.ParcelId}"))))
 ```
 
-As you can see, generic extensions can be used when defining the endpoints (although it's not required). Whenever you define a generic endpoint with a type T, it will bind the incoming request to the new instance of T (think of it as something similar to command).
+As you can see, generic extensions can be used when defining the endpoints (although it's not required). Whenever you define a generic endpoint with a type `T`, it will bind the incoming request to the new instance of `T` (think of it as something similar to command).
 
-To automatically handle the incoming request, you can implement `IRequest` market interface for type T and create an `IRequestHandler<T>` that will be invoked automatically.
+To automatically handle the incoming request, you can implement `IRequest` market interface for type `T` and create an `IRequestHandler<T>` that will be invoked automatically.
 
 ```csharp
 public class DeleteParcel : IRequest
@@ -70,9 +70,7 @@ public class DeleteParcelHandler : IRequestHandler<DeleteParcel, int>
 {
     public async Task<int> HandleAsync(DeleteParcel request)
     {
-        
         // Deleted a parcel, let's return its ID.
-
         return request.ParcelId;
     }
 }
@@ -113,7 +111,7 @@ public static IWebHostBuilder GetWebHostBuilder(string[] args)
                     afterDispatch: (cmd, ctx) => ctx.Response.Created($"parcels/{cmd.ParcelId}"))))
 ```
 
-To expose all of the `commands` and `events` as a sort of auto-documentation that might be helpful for integration with other services (similarly to what Swagger does) under a specialized endpoint (by default: `_contracts`) returning an array of commands and events objects using JSON format, invoke `UsePublicContracts<T>()` extension, where T is a marker attribute used to expose the selected types.
+To expose all of the `commands` and `events` as a sort of auto-documentation (might be helpful for integration with other services) (similarly to what Swagger does) under a custom endpoint (by default: `_contracts`) returning an array of commands and events objects using JSON format, invoke `UsePublicContracts<T>()` extension, where T is a marker attribute used to expose the selected types.
 
 ```csharp
 public class ContractAttribute : Attribute
