@@ -80,7 +80,7 @@ public class DeleteParcelHandler : IRequestHandler<DeleteParcel, int>
 
 ## CQRS Integration
 
-To seamlessly integrate with Command and Query handlers that can be invoked either by internal API call via HTTP or a message broker (just make sure that you don't process queries asynchronously, as it doesn't make much sense), CQRS integration with Web API can be installed.
+To seamlessly integrate with `command` and `query` handlers that can be invoked either by internal HTTP API call or a message broker (just make sure that you don't process queries asynchronously, as it doesn't make much sense), CQRS integration with Web API has to be installed.
 
 ## Installation
 `dotnet add package Convey.WebApi.CQRS`
@@ -148,7 +148,7 @@ public static IWebHostBuilder GetWebHostBuilder(string[] args)
 To integrate Swagger documentation on top of Web API defined as a set of endpoints without the usage of full `AddMvc()` and using custom `Controllers`, it is required to install this package.
 
 ## Installation
-`dotnet add package Convey.WebApi.CQRS`
+`Convey.WebApi.Swagger`
 
 ## Dependencies
 
