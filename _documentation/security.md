@@ -61,8 +61,8 @@ public class UserService
     
     public async Task<string> SignInAsync(string email, string password)
     {
-        var user = ... //Fetch user from a custom database
-        ValidateCredentials(user, password); //Validate the credentials
+        var user = ... //Fetch the user from a custom database
+        ValidateCredentials(user, password); //Validate the credentials etc.
 
         //Generate the token with an optional role and other claims
         var token = _jwtHandler.CreateToken(user.Id, user.Role, user.Claims); 
@@ -85,7 +85,7 @@ To blacklist and deactivate the access tokens, use `IAccessTokenService` and inv
 ### appsettings.json
 
 ```js
-"vault": {
+"jwt": {
   "secretKey": "secret,
   "issuer": "identity-service",
   "expiryMinutes": 5,
