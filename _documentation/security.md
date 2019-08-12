@@ -19,7 +19,7 @@ Adds the integration with [JWT](https://jwt.io) using an available authenticatio
 ## Dependencies
 
 * [Convey](https://www.nuget.org/packages/Convey)
-* [Convey.Persistence.Redis](Convey.Persistence.Redis)
+* [Convey.Persistence.Redis](https://www.nuget.org/packages/Convey.Persistence.Redis)
   
 ## Usage
 
@@ -70,7 +70,7 @@ public class UserService
 }
 ```
 
-To blacklist and deactivate the access tokens, use `IAccessTokenService` and invoke `UseAccessTokenValidator()` extension. Blacklisted tokens are kept in Redis cache for the period of their expiry.
+To blacklist and deactivate the access tokens, use `IAccessTokenService` and invoke `UseAccessTokenValidator()` extension. Blacklisted tokens are kept in `Redis` cache for the period of their expiry.
 
 ## Options
 * `secretKey` - a secret key used to create the access tokens.
