@@ -67,3 +67,4 @@ The core Convey package also registers `AppOptions` type which contains the appl
   "name": "some service",
   "displayBanner": true
 }
+```
