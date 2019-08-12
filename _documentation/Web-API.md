@@ -51,9 +51,9 @@ public static IWebHostBuilder GetWebHostBuilder(string[] args)
                 .Post<AddParcel>("parcels", (req, ctx) => ctx.Response.Created($"parcels/{req.ParcelId}"))))
 ```
 
-As you can see, generic extensions can be used when defining the endpoints (although it's not required). Whenever you define a generic endpoint with a type `T`, it will bind the incoming request to the new instance of `T` (think of it as something similar to command).
+As you can see, **generic extensions can be used when defining the endpoints** (although it's not required). Whenever you define a generic endpoint with a type `T`, it will bind the incoming request to the new instance of `T` (think of it as something similar to command).
 
-To automatically handle the incoming request, you can implement `IRequest` market interface for type `T` and create an `IRequestHandler<T>` that will be invoked automatically.
+To automatically handle the incoming request, you can implement `IRequest` marker interface for type `T` and create an `IRequestHandler<T>` that will be invoked automatically.
 
 ```csharp
 public class DeleteParcel : IRequest
