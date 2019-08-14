@@ -13,6 +13,8 @@ hero:
 ## Vault
 Adds the secured and centralized configuration storage integration using [Vault](https://www.vaultproject.io).
 
+![](/img/vault.png "Vault")
+
 ## Installation
 `dotnet add package Convey.Configurations.Vault`
 

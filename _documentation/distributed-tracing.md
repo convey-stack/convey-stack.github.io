@@ -13,6 +13,10 @@ hero:
 ## Overview
 Integrates application with [Jaeger](https://www.jaegertracing.io/) (end-to-end distributed tracing) using selected reporter and sampler.
 
+![](/img/jaeger_1.png "Jaeger")
+
+![](/img/jaeger_2.png "Jaeger")
+
 ## Installation
 `dotnet add package Convey.Tracing.Jaeger`
 

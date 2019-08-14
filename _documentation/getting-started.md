@@ -68,3 +68,5 @@ The core Convey package also registers `AppOptions` type which contains the appl
   "displayBanner": true
 }
 ```
+
+![](/img/banner.png "Banner")

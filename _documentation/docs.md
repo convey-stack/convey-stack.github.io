@@ -13,6 +13,8 @@ hero:
 ## Overview
 Adds API documentation using [Swagger](https://swagger.io/docs/) or [ReDoc](https://redoc.ly/).
 
+![](/img/swagger.png "Swagger")
+
 ## Installation
 `dotnet add package Convey.Docs.Swagger`
 

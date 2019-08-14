@@ -78,6 +78,8 @@ public class SomeService
 ## Overview
 Provides `ConsulServiceDiscoveryMessageHandler` (used by `IHttpClient`) that integrates with [Consul](https://www.consul.io) service discovery mechanism.
 
+![](/img/consul.png "Consul")
+
 ## Installation
 `dotnet add package Convey.Discovery.Consul`
 
@@ -144,6 +146,8 @@ public static IApplicationBuilder UseConvey(this IApplicationBuilder app)
 ## Overview
 Provides `FabioMessageHandler` (used by `IHttpClient`) that integrates with [Fabio](https://github.com/fabiolb/fabio) load balancer.
 In order to use Fabio, it is required to configure Consul as described above.
+
+![](/img/fabio.png "Fabio")
 
 ## Installation
 `dotnet add package Convey.LoadBalancing.Fabio`

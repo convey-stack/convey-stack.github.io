@@ -113,6 +113,8 @@ public static IWebHostBuilder GetWebHostBuilder(string[] args)
 
 To expose all of the `commands` and `events` as a sort of auto-documentation (might be helpful for integration with other services) (similarly to what Swagger does) under a custom endpoint (by default: `_contracts`) returning an array of commands and events objects using JSON format, invoke `UsePublicContracts<T>()` extension, where `T` can be a so-called marker attribute used to expose the selected types.
 
+![](/img/contracts.png "Contracts")
+
 ```csharp
 public class ContractAttribute : Attribute
 {

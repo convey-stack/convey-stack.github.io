@@ -13,6 +13,9 @@ hero:
 ## Overview
 Adds capability of generating application metrics and exposing them via HTTP endpoint.
 
+![](/img/grafana.png "Grafana")
+![](/img/prometheus.png "Prometheus")
+
 ### Installation
 `dotnet add package Convey.Metrics.AppMetrics`
 

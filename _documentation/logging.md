@@ -17,6 +17,8 @@ Adds the logging capability, by default uses [Serilog](https://serilog.net) for 
 * File
 * [Seq](https://datalust.co/seq)
 
+![](/img/seq.png "Seq")
+
 ## Installation
 `dotnet add package Convey.Logging`
 

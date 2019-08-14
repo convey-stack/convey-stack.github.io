@@ -13,6 +13,8 @@ hero:
 ### Overview
 Adds the set of conventions and ease of use for [RabbitMQ](https://www.rabbitmq.com/) integration with .NET Core.
 
+![](/img/rabbitmq.png "RabbitMQ")
+
 ### Installation
 `dotnet add package Convey.MessageBrokers.RabbitMQ`
 

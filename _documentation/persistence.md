@@ -15,6 +15,8 @@ hero:
 ## Overview
 Adds the set of conventions and ease of use for [MongoDB](https://www.mongodb.com) integration with .NET Core.
 
+![](/img/mongo.png "MongoDB")
+
 ## Installation
 `dotnet add package Convey.Persistence.MongoDB`
 
@@ -84,6 +86,8 @@ public class SomeService
 
 ## Overview
 Adds the [Redis](https://redis.io/) integration with .NET Core based on [IDistributedCache](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) abstraction.
+
+![](/img/redis.png "Redis")
 
 ## Installation
 `dotnet add package Convey.Persistence.Redis`
