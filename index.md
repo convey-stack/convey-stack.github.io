@@ -48,12 +48,12 @@ features:
               style: filled # Choose style: "filled" or "bordered"
               icon: # Choose from 266 icons in "Feather" icon set, list of all icons is available here - https://feathericons.com            
             - label: Chronicle
-              url: https://github.com/chronicle-stack/chronicle
+              url: https://github.com/snatch-dev/Chronicle
               external_url: true # Set to "false" if you're pointing to inner page
               style: bordered # Choose style: "filled" or "bordered"
               icon: # Choose from 266 icons in "Feather" icon set, list of all icons is available here - https://feathericons.com
             - label: Ntrada
-              url: https://github.com/Ntrada/Ntrada
+              url: https://github.com/snatch-dev/Ntrada
               external_url: true
               style: bordered
               icon:

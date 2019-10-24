@@ -12,7 +12,7 @@ dox:
             - item_name: Home
               item_url: /
             - item_name: Repository
-              item_url: https://github.com/convey-stack
+              item_url: https://github.com/snatch-dev/Convey
             - item_name: DevMentors
               item_url: https://devmentors.io
         cta:
