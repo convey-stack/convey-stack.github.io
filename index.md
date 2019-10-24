@@ -17,7 +17,7 @@ hero:
           style: filled # Choose style: "filled" or "bordered"
           icon: edit
         - label: Browse repository
-          url: https://github.com/convey-stack
+          url: https://github.com/snatch-dev/Convey
           external_url: true
           style: bordered
           icon: github
