@@ -16,11 +16,11 @@ hero:
           external_url: false # Set to "false" if you're pointing to inner page
           style: filled # Choose style: "filled" or "bordered"
           icon: edit
-        - label: Browse repository
-          url: https://github.com/snatch-dev/Convey
+        - label: Watch video
+          url: https://www.youtube.com/watch?v=cxEXx4UT1FI
           external_url: true
           style: bordered
-          icon: github
+          icon: youtube
 
 # Features section
 features:
