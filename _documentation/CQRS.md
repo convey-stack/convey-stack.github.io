@@ -34,7 +34,7 @@ public class CreateAccount : ICommand
     public string Email { get; }
     public string Password { get; }
 
-    public CreateUser(id, email, password)
+    public CreateUser(Guid id, string email, string password)
     {
         Id = id;
         Email = email;
