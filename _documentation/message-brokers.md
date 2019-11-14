@@ -25,10 +25,10 @@ Adds the set of conventions and ease of use for [RabbitMQ](https://www.rabbitmq.
 * [Convey.Persistence.Redis](https://www.nuget.org/packages/Convey.Persistence.Redis)
 
 ### Options
-Convey exteds [RawRabbitConfiguration](https://rawrabbit.readthedocs.io/en/master/configuration.html) with the following properties:
+Convey extends [RawRabbitConfiguration](https://rawrabbit.readthedocs.io/en/master/configuration.html) with the following properties:
 
 * `namespace` - used for creating queue name, exchange name, queue-exchange binding and routing key.
-* `retries` - specifies number of retries for proceessing each message
+* `retries` - specifies number of retries for processing each message
 * `retryInterval` - specifies interval (in seconds) between each retry
 * `processors` - specifies message processors
 
@@ -108,12 +108,12 @@ public void Configure(this IApplicationBuilder app)
 Once you subscribe to message a coresponding RabbitMQ **topic exchange** and **queue** should be created using the following conventions:
 
 * `Exchange name` - `{namespace}`
-* `Queue name` - `{assemlbyName}/{namespace}.{messageName}` 
-* `Echange-Queue Binding` - `{namespace}.{messageName}`
+* `Queue name` - `{assemblyName}/{namespace}.{messageName}` 
+* `Exchange-Queue Binding` - `{namespace}.{messageName}`
 
 If `namespace` parameter is not specified in the `appsettings.json` this part of the name is skipped.
 
-To publish a message simply inject `IBusPublsiher` into any class you want and invoke `PublishAsync()` passing the message and correlation context.
+To publish a message simply inject `IBusPublisher` into any class you want and invoke `PublishAsync()` passing the message and correlation context.
 
 ```csharp
 public class CustomBusPublisher
@@ -135,7 +135,7 @@ The given message is published to an **exchange** with the following conventions
 * `Exchange name` - `{namespace}` or value passed in the `MessageNamespaceAttribute`
 * `Message routing key` - `{namespace}.{messageName}`or `{valueFromMessageNamespaceAttribute}.{messageName}`
 
-Thus if you use Convey withing just **one application** the only, required parameter to make publish/subscribe work is a `namespace` parameter inside `appsettings.json`. Once you communicate **multiple, independent apps (like microservices)** `MessageNamespaceAttribute` is necessary on the publisher side to send a message to the correct exchange with correct message routing key.
+Thus if you use Convey within just **one application** the only, required parameter to make publish/subscribe work is a `namespace` parameter inside `appsettings.json`. Once you communicate **multiple, independent apps (like microservices)** `MessageNamespaceAttribute` is necessary on the publisher side to send a message to the correct exchange with correct message routing key.
 
 ```csharp
 [MessageNamespace("parcels")]
@@ -213,7 +213,7 @@ public void Configure(this IApplicationBuilder app)
 }
 ```
 
-Once the message is received, it gets distpatched using [ICommandDispatcher](https://convey-stack.github.io/documentation/CQRS/) or [IEventDispatcher](https://convey-stack.github.io/documentation/CQRS/).
+Once the message is received, it gets dispatched using [ICommandDispatcher](https://convey-stack.github.io/documentation/CQRS/) or [IEventDispatcher](https://convey-stack.github.io/documentation/CQRS/).
 
 To publish a message simply inject `IBusPublsiher` into any class you want and invoke `SendAsync()` (for commands) or `PublishAsync()` (for event) passing the message and correlation context.
 
@@ -264,7 +264,7 @@ You can easily integrate RabbitMQ messaging with [Jaeger](https://convey-stack.g
 * [Convey.Tracing.Jaeger](https://www.nuget.org/packages/Convey.Tracing.Jaeger)
 
 ### Usage
-Add Jaeger options accoridng to [Convey.Tracing.Jaeger docs](https://convey-stack.github.io/documentation/distributed-tracing/) and add plugin using `RegisterJaeger()` method inside RabbtiMq registration:
+Add Jaeger options according to [Convey.Tracing.Jaeger docs](https://convey-stack.github.io/documentation/distributed-tracing/) and add plugin using `RegisterJaeger()` method inside RabbitMq registration:
 
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
