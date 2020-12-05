@@ -71,6 +71,11 @@ features:
               external_url: true
               style: bordered
               icon:
+            - label: Pactify
+              url: https://github.com/snatch-dev/Pactify
+              external_url: true
+              style: bordered
+              icon:
 ---
 
         buttons: # Add buttons below, there are examples with all available options
