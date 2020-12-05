@@ -47,7 +47,7 @@ features:
               external_url: true # Set to "false" if you're pointing to inner page
               style: filled # Choose style: "filled" or "bordered"
             - label: Distributed .NET Core
-              url: https://devmentors.io/distributed-net-core/
+              url: https://www.youtube.com/watch?v=6YYB8vv3pZg&list=PLqqD43D6Mqz38LoZEuo_hJAp2NxXskcut
               external_url: true # Set to "false" if you're pointing to inner page
               style: bordered # Choose style: "filled" or "bordered"
               icon: # Choose from 266 icons in "Feather" icon set, list of all icons is available here - https://feathericons.com            

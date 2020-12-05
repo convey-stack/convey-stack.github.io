@@ -23,7 +23,7 @@ In order to find out how you can **use Convey in a real-world scenarios,** take 
 * **[NPost](https://github.com/devmentors/NPost)** - only a few services, and rather simple parcel delivery domain 
 * **[DShop](https://github.com/devmentors/DNC-DShop)** - doesn't use Convey, but instead contains the so-called **Common** project which was one of the reasons why we started building Convey (by splitting up into smaller, independent pieces a single shared library).
 
-And if you're looking for the resources about building microservices with .NET Core, **check out our premium** course [Microservices .NET](https://devmentors.io/courses/microservices-net) or a **free one** available on YouTube (almost 20 hours) titled [Distributed .NET Core](https://devmentors.io/distributed-net-core).
+And if you're looking for the resources about building microservices with .NET Core, **check out our premium** course [Microservices .NET](https://devmentors.io/courses/microservices-net) or a **free one** available on YouTube (almost 20 hours) titled [Distributed .NET Core](https://www.youtube.com/watch?v=6YYB8vv3pZg&list=PLqqD43D6Mqz38LoZEuo_hJAp2NxXskcut).
 
 Feel free to take a look at **our other projects** that you might find useful when building the distributed services:
 
