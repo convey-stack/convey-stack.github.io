@@ -40,13 +40,27 @@ features:
 
     footer: # Set features section footer variables
         title: Other projects
-        description: Watch our free course about building microservices and take a look at other projects.
+        description: Watch our courses about building microservices and take a look at other projects.
         buttons: # Add buttons below, there are examples with all available options
+            - label: Microservices .NET
+              url: https://devmentors.io/courses/microservices-net
+              external_url: true # Set to "false" if you're pointing to inner page
+              style: filled # Choose style: "filled" or "bordered"
             - label: Distributed .NET Core
               url: https://devmentors.io/distributed-net-core/
               external_url: true # Set to "false" if you're pointing to inner page
-              style: filled # Choose style: "filled" or "bordered"
+              style: bordered # Choose style: "filled" or "bordered"
               icon: # Choose from 266 icons in "Feather" icon set, list of all icons is available here - https://feathericons.com            
+            - label: Pacco
+              url: https://github.com/devmentors/Pacco
+              external_url: true
+              style: bordered
+              icon:
+            - label: Trill
+              url: https://github.com/devmentors/Trill
+              external_url: true
+              style: bordered
+              icon:
             - label: Chronicle
               url: https://github.com/snatch-dev/Chronicle
               external_url: true # Set to "false" if you're pointing to inner page
