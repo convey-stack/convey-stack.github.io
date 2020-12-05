@@ -1,96 +1,89 @@
 ---
 title: Security
-description: JWT authentication.
+description: Secure configuration using Vault.
 keywords:
-order: 11
+order: 9
 comments: false
 
 hero:
     title: Security
-    text: JWT authentication.
+    text: Secure configuration using Vault.
 ---
 
-## JWT
-Adds the integration with [JWT](https://jwt.io) using an available authentication middleware and system components to validate and grant the access tokens. 
+## Vault
+Adds the secured and centralized configuration storage integration using [Vault](https://www.vaultproject.io).
+
+![](/img/vault.png "Vault")
 
 ## Installation
-`dotnet add package Convey.Auth`
+`dotnet add package Convey.Configurations.Vault`
 
 ## Dependencies
 
 * [Convey](https://www.nuget.org/packages/Convey)
-* [Convey.Persistence.Redis](https://www.nuget.org/packages/Convey.Persistence.Redis)
-  
+
 ## Usage
 
-Extend `IConveyBuilder` with `AddJwt()` that will register the required services.
+Extend `Program.cs` -> `CreateDefaultBuilder()` with `UseVault()` that will add the required services and fetch the options from Vault key-value secret storage during an application startup.
 
 ```csharp
-public static IConveyBuilder RegisterConvey(this IConveyBuilder builder)
-{
-    builder.AddJwt()
-    // Other services.
-
-    return builder;
-}
+public static IWebHostBuilder GetWebHostBuilder(string[] args)
+    => WebHost.CreateDefaultBuilder(args)
+        .ConfigureServices(services => services.AddConvey().Build())
+        .UseVault();
 ```
-
-Then, invoke `UseAuthentication()` extension from `IApplicationBuilder`.
-
-```csharp
-public static IApplicationBuilder UseConvey(this IApplicationBuilder app)
-{
-    app.UseAuthentication();
-    // Other services.
-
-    return app;
-}
-```
-
-Creating the access tokens can be done by using `IJwtHandler` interface.
-
-```csharp
-public class UserService
-{
-    private readonly IJwtHandler _jwtHandler;
-
-    public UserService(IJwtHandler jwtHandler)
-    {
-        _jwtHandler = jwtHandler;
-    }
-    
-    public async Task<string> SignInAsync(string email, string password)
-    {
-        var user = ... //Fetch the user from a custom database
-        ValidateCredentials(user, password); //Validate the credentials etc.
-
-        //Generate the token with an optional role and other claims
-        var token = _jwtHandler.CreateToken(user.Id, user.Role, user.Claims); 
-
-        return token.AccessToken;
-    }
-}
-```
-
-To blacklist and deactivate the access tokens, use `IAccessTokenService` and invoke `UseAccessTokenValidator()` extension. Blacklisted tokens are kept in `Redis` cache for the period of their expiry.
 
 ## Options
-* `secretKey` - a secret key used to create the access tokens.
-* `issuer` - a party signing the tokens.
-* `expiryMinutes` - how long the token will remain valid.
-* `validateLifetime` - if `true` then the lifetime defined in `expiryMinutes` will be validated.
-* `validAudience` - an audience that can use the access tokens.
-* `validateAudience` - if `true` then the audience defined in `validAudience` will be validated.
+* `enabled` - determines whether Vault integration is going to be available.
+* `url` - URL of the Vault service.
+* `authType` - authentication type, possible values: `token`, `userpass`.
+* `token` - a secret token used to authenticate to Vault, used when `authType` = `token`.
+* `username` - name of the user used to authenticate to Vault, used when `authType` = `userpass`.
+* `password` - password of the user used to authenticate to Vault, used when `authType` = `userpass`.
+* `kv` - KV storage used for loading JSON settings during application startup.
 
 ### appsettings.json
 
-```js
-"jwt": {
-  "secretKey": "secret,
-  "issuer": "identity-service",
-  "expiryMinutes": 5,
-  "validateLifetime": true,
-  "validAudience": "audience",
-  "validateAudience": true,
+```json
+"vault": {
+  "enabled": true,
+  "url": "http://localhost:8200",
+  "authType": "token",
+  "token": "secret",
+  "username": "user",
+  "password": "secret",
+  "kv": {
+    "enabled": true,
+    "engineVersion": 2,
+    "mountPoint": "kv",
+    "path": "some-service/settings"
+  },
+  "pki": {
+    "enabled": true,
+    "roleName": "some-service",
+    "commonName": "some-service.some-app.io"
+  },
+  "lease": {
+    "mongo": {
+      "type": "database",
+      "roleName": "some-service",
+      "enabled": true,
+      "autoRenewal": true,
+      "templates": {
+        "connectionString": "mongodb://{{username}}:{{password}}@localhost:27017"
+      }
+    }
+  }
 }
 ```
+
+**Beware** that storing the secret token or other type of credentials used while authenticating to Vault during an application startup in `appsettings.json` file **is not really secure**. Instead, you should **set these values by using e.g. environment variables** when deploying your services to the server/cloud - such scenario can be done in a numerous ways, either by CI/CD tools or even with the usage of manual deployment.
+
+Each setting within the `appsettings.json` file can be [overriden](https://docs.microsoft.com/pl-pl/aspnet/core/fundamentals/configuration) with a proper environment variable. You can also override Vault settings with the following (custom) environment variables:
+
+* VAULT_URL
+* VAULT_KEY
+* VAULT_AUTH_TYPE
+* VAULT_TOKEN
+* VAULT_USERNAME
+* VAULT_PASSWORD

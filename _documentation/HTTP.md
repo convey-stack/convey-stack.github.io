@@ -62,7 +62,7 @@ public class SomeService
 
 ### appsettings.json
 
-```js
+```json
 "httpClient": {
   "type": "",
   "retries": 2,
@@ -104,18 +104,6 @@ public static IConveyBuilder RegisterConvey(this IConveyBuilder builder)
 }
 ```
 
-Then, invoke `UseConsul()` extension from `IApplicationBuilder`.
-
-```csharp
-public static IApplicationBuilder UseConvey(this IApplicationBuilder app)
-{
-    app.UseConsul();
-    // Other services.
-
-    return app;
-}
-```
-
 ## Options
 * `enabled` - determines whether Consul integration is going to be available.
 * `url` - URL of the Consul service.
@@ -127,7 +115,7 @@ public static IApplicationBuilder UseConvey(this IApplicationBuilder app)
 
 ### appsettings.json
 
-```js
+```json
 "consul": {
   "enabled": true,
   "url": "http://localhost:8500",
@@ -182,7 +170,7 @@ public static IConveyBuilder RegisterConvey(this IConveyBuilder builder)
 
 ### appsettings.json
 
-```js
+```json
 "fabio": {
   "enabled": true,
   "url": "http://localhost:9999",

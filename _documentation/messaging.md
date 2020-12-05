@@ -1,12 +1,12 @@
 ---
-title: Message brokers
+title: Messaging
 description: Asynchronous messaging using RabbitMQ.
 keywords:
 order: 4
 comments: false
 
 hero:
-    title: Message brokers
+    title: Messaging
     text: Asynchronous messaging using RabbitMQ.
 ---
 
@@ -22,77 +22,83 @@ Adds the set of conventions and ease of use for [RabbitMQ](https://www.rabbitmq.
 
 * [Convey](https://www.nuget.org/packages/Convey)
 * [Convey.MessageBrokers](https://www.nuget.org/packages/Convey.MessageBrokers)
-* [Convey.Persistence.Redis](https://www.nuget.org/packages/Convey.Persistence.Redis)
 
 ### Options
-Convey exteds [RawRabbitConfiguration](https://rawrabbit.readthedocs.io/en/master/configuration.html) with the following properties:
-
-* `namespace` - used for creating queue name, exchange name, queue-exchange binding and routing key.
-* `retries` - specifies number of retries for proceessing each message
-* `retryInterval` - specifies interval (in seconds) between each retry
-* `processors` - specifies message processors
+Provides RabbitMQ integration based on the official [RabbitMQ .NET Client](https://www.rabbitmq.com/dotnet.html) with highly customizable settings, support for custom naming conventions, templating, dead letter exchange and many more.
 
 
 ### appsettings.json
 
-```js
+```json
 "rabbitMq": {
-    "namespace": "availability",
-    "retries": 3,
-    "retryInterval": 2,
-    "messageProcessor": {
-      "enabled": true,
-      "type": "redis",
-      "messageExpirySeconds": 300
-    },
-    "username": "guest",
-    "password": "guest",
-    "virtualHost": "/",
-    "port": 5672,
-    "hostnames": [
-      "localhost"
-    ],
-    "requestTimeout": "00:00:10",
-    "publishConfirmTimeout": "00:00:01",
-    "recoveryInterval": "00:00:10",
-    "persistentDeliveryMode": true,
-    "autoCloseConnection": true,
-    "automaticRecovery": true,
-    "topologyRecovery": true,
-    "exchange": {
-      "durable": true,
-      "autoDelete": false,
-      "type": "Topic"
-    },
-    "queue": {
-      "autoDelete": false,
-      "durable": true,
-      "exclusive": false
-    }
-  }
+  "connectionName": "some-service",
+  "retries": 3,
+  "retryInterval": 2,
+  "conventionsCasing": "snakeCase",
+  "logger": {
+    "enabled": true
+  },
+  "username": "guest",
+  "password": "guest",
+  "virtualHost": "/",
+  "port": 5672,
+  "hostnames": [
+    "localhost"
+  ],
+  "requestedConnectionTimeout": "00:00:30",
+  "requestedHeartbeat": "00:01:00",
+  "socketReadTimeout": "00:00:30",
+  "socketWriteTimeout": "00:00:30",
+  "continuationTimeout": "00:00:20",
+  "handshakeContinuationTimeout": "00:00:10",
+  "networkRecoveryInterval": "00:00:05",
+  "exchange": {
+    "declare": true,
+    "durable": true,
+    "autoDelete": false,
+    "type": "topic",
+    "name": "stories"
+  },
+  "queue": {
+    "declare": true,
+    "durable": true,
+    "exclusive": false,
+    "autoDelete": false,
+    "template": "some-service/{{exchange}}.{{message}}"
+  },
+  "context": {
+    "enabled": true,
+    "header": "message_context"
+  },
+  "deadLetter": {
+    "enabled": true,
+    "prefix": "dlx-",
+    "declare": true
+  },
+  "maxProducerChannels": 1000,
+  "requeueFailedMessages": false,
+  "spanContextHeader": "span_context"
+},
 ```
 
 
 ### Usage
-Inside `Startup.cs` extend `IConveyBuilder` with `AddRabbitMq<TContext>()` that will register the required services. 
+Inside `Startup.cs` extend `IConveyBuilder` with `AddRabbitMq()` that will register the required services. 
 
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
-        .AddRabbitMq<CorrelationContext>();
+    var builder = services.AddConvey()
+        .AddRabbitMq();
 
     //other registrations    
     return builder.Build();
 }
 ```
 
-Note that registration method requires `TContext` generic parameter. Given type must implement `ICorrelationContext` interface provided by Convey and it's used for correlating set of messages that have been sent all across the application during single a HTTP request.
-
 The above registration creates a unique connection to RabbitMQ and registers services required for publishing and subscribing the messages.
 
-To subscribe for a particular message, invoke `UseRabbitMq()` method on `IApplicationBuilder` and call `Subscribe<TMessage>()` passing a function which is going to be executed once the message got received.
+To subscribe to a particular message, invoke `UseRabbitMq()` method on `IApplicationBuilder` and call `Subscribe<TMessage>()` passing a function which is going to be executed once the message got received.
 
 ```csharp
 public void Configure(this IApplicationBuilder app)
@@ -105,15 +111,41 @@ public void Configure(this IApplicationBuilder app)
 }
 ```
 
-Once you subscribe to message a coresponding RabbitMQ **topic exchange** and **queue** should be created using the following conventions:
+Once you subscribe to message a coresponding RabbitMQ **topic**, **exchange** and **routing key** should be created using the following conventions:
 
-* `Exchange name` - `{namespace}`
-* `Queue name` - `{assemlbyName}/{namespace}.{messageName}` 
-* `Echange-Queue Binding` - `{namespace}.{messageName}`
+* `Exchange` - `{options.exchange.name}`
+* `Queue` - `{options.queue.template}` 
+* `Routing key` - `{messageType}`
 
-If `namespace` parameter is not specified in the `appsettings.json` this part of the name is skipped.
+The conventions can be overriden either by providing the custom implementation of `IConventionsBuilder`:
 
-To publish a message simply inject `IBusPublsiher` into any class you want and invoke `PublishAsync()` passing the message and correlation context.
+```csharp
+public interface IConventionsBuilder
+{
+    string GetRoutingKey(Type type);
+    string GetExchange(Type type);
+    string GetQueue(Type type);
+}
+```
+
+Or by applying `[Message]` attribute on top of the class e.g.
+
+```csharp
+[Message("users")]
+public class UserCreated : IEvent
+{
+    public Guid UserId { get; }
+    public string Name { get; }
+
+    public UserCreated(Guid userId, string name)
+    {
+        UserId = userId;
+        Name = name;
+    }
+}
+```
+
+To publish a message simply inject `IBusPublisher`  into any class you want and invoke `PublishAsync()` (or make use `IRabbitMqClient`) passing the message and the additional parameters,
 
 ```csharp
 public class CustomBusPublisher
@@ -125,27 +157,9 @@ public class CustomBusPublisher
         _publisher = publisher;
     }
 
-    public Task PublishMessageAsync<T>(T message, CorrelationContext context)
-        => _publisher.PublishAsync(message, context);
+    public Task PublishMessageAsync<T>(T message) => _publisher.PublishAsync(message);
 }
 ```
-
-The given message is published to an **exchange** with the following conventions:
-
-* `Exchange name` - `{namespace}` or value passed in the `MessageNamespaceAttribute`
-* `Message routing key` - `{namespace}.{messageName}`or `{valueFromMessageNamespaceAttribute}.{messageName}`
-
-Thus if you use Convey withing just **one application** the only, required parameter to make publish/subscribe work is a `namespace` parameter inside `appsettings.json`. Once you communicate **multiple, independent apps (like microservices)** `MessageNamespaceAttribute` is necessary on the publisher side to send a message to the correct exchange with correct message routing key.
-
-```csharp
-[MessageNamespace("parcels")]
-public class CreateParcel
-{
-
-}
-```
-
-The above message will be published to `parcels` exchange with `parcels.create_parcels` routing key. If no attribute is specified then `namespace` parameter from `appsettings.json` is used instead.
 
 ### Error handling
 During message processing there might be a chance that an exception will be thrown. We can distinguish two types of exceptions:
@@ -173,9 +187,8 @@ public class ExceptionToMessageMapper : IExceptionToMessageMapper
 
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
-        .AddRabbitMq<CorrelationContext>()
+    var builder = services.AddConvey()
+        .AddRabbitMq()
         .AddExceptionToMessageMapper<ExceptionToMessageMapper>();
 
     //other registrations    
@@ -185,7 +198,24 @@ public IServiceProvider ConfigureServices(this IServiceCollection services)
 
 If an exception will be thrown during message processing, a mapper is used to produce another message that will be automatically published to RabbitMQ. If exception->message mapping is not be defined, **retry** is going to be performed according to parameters provided in `appsettings.json`.   
 
-### Message processors
+
+## Dead-letter exchange
+
+[DLX](https://www.rabbitmq.com/dlx.html) support can be enabled via options:
+
+```json
+"deadLetter": {
+  "enabled": true,
+  "prefix": "dlx-",
+  "declare": true,
+  "durable": true,
+  "exclusive": false,
+  "autoDelete": false,
+  "ttl": 86400
+}
+```
+
+Each message which is not defined as a part of rejected event mapping in `IExceptionToMessageMapper`, will be published to its own dead letter queue which will be named based on `{options.prefix}{queue}` e.g. for `users` queue, there would be `dlx-users` dead letter queue.
 
 ## CQRS integration
 Convey allows you to integrate asynchronous communication with CQRS principle providing set of extension methods for publishing/subscribing **commands** and **events**. 
@@ -227,11 +257,11 @@ public class CustomBusPublisher
         _publisher = publisher;
     }
 
-    public Task PublishCommandAsync<TCommand>(TCommand command, CorrelationContext context) where T : class, ICommand
-        => _publisher.SendAsync(command, context);
+    public Task PublishCommandAsync<TCommand>(TCommand command) where T : class, ICommand
+        => _publisher.SendAsync(command);
 
-    public Task PublishEventAsync<TEvent>(TEvent @event, CorrelationContext context) where T : class, IEvent
-        => _publisher.PublishAsync(@event, context);
+    public Task PublishEventAsync<TEvent>(TEvent @event) where T : class, IEvent
+        => _publisher.PublishAsync(@event);
 }
 ```
 
@@ -240,8 +270,7 @@ This package also allows you register async dispatcher instead of "in-memory". E
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddQueryHandlers()
         .AddServiceBusCommandDispatcher()
         .AddServiceBusEventDispatcher();
@@ -254,7 +283,6 @@ public IServiceProvider ConfigureServices(this IServiceCollection services)
 ## Jaeger integration
 You can easily integrate RabbitMQ messaging with [Jaeger](https://convey-stack.github.io/documentation/distributed-tracing/) using Convey package.
 
-
 ### Installation
 `dotnet add package Convey.Tracing.Jaeger.RabbitMQ`
 
@@ -264,17 +292,46 @@ You can easily integrate RabbitMQ messaging with [Jaeger](https://convey-stack.g
 * [Convey.Tracing.Jaeger](https://www.nuget.org/packages/Convey.Tracing.Jaeger)
 
 ### Usage
-Add Jaeger options accoridng to [Convey.Tracing.Jaeger docs](https://convey-stack.github.io/documentation/distributed-tracing/) and add plugin using `RegisterJaeger()` method inside RabbtiMq registration:
+Add Jaeger options accoridng to [Convey.Tracing.Jaeger docs](https://convey-stack.github.io/documentation/distributed-tracing/) and add plugin using `AddJaegerRabbitMqPlugin()` method inside RabbtiMq optional `plugins` registration:
 
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
-        .AddRabbitMq<CorrelationContext>(p => p.RegisterJaeger());
+    var builder = services.AddConvey()
+        .AddRabbitMq(plugins: p => p.AddJaegerRabbitMqPlugin());
 
     //other registrations    
     return builder.Build();
 }
 ```
 
+
+## Inbox + Outbox pattern
+
+Provides exactly-once processing and guaranteed message delivery features based on inbox and outbox patterns. Currently supported storage:
+
+- In memory (mostly for the testing purposes)
+- SQL using Entity Framework    `dotnet add package Convey.MessageBrokers.Outbox.EntityFramework`
+- Mongo                         `dotnet add package Convey.MessageBrokers.Outbox.Mongo`
+
+```csharp
+public IServiceProvider ConfigureServices(this IServiceCollection services)
+{
+    var builder = services.AddConvey()
+        .AddMessageOutbox(outbox => outbox.AddMongo());
+
+    //other registrations    
+    return builder.Build();
+}
+```
+
+```json
+"outbox": {
+  "enabled": true,
+  "type": "sequential",
+  "expiry": 3600,
+  "intervalMilliseconds": 2000,
+  "inboxCollection": "inbox",
+  "outboxCollection": "outbox"
+}
+```

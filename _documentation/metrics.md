@@ -19,6 +19,10 @@ Adds capability of generating application metrics and exposing them via HTTP end
 ### Installation
 `dotnet add package Convey.Metrics.AppMetrics`
 
+or just a dedicated package for Prometheus:
+
+`dotnet add package Convey.Metrics.Prometheus`
+
 ### Dependencies
 
 * [Convey](https://www.nuget.org/packages/Convey)
@@ -35,7 +39,7 @@ Adds capability of generating application metrics and exposing them via HTTP end
 
 ### appsettings.json
 
-```js
+```json
 "metrics": {
     "enabled": true,
     "influxEnabled": false,
@@ -44,7 +48,16 @@ Adds capability of generating application metrics and exposing them via HTTP end
     "database": "pacco",
     "env": "local",
     "interval": 5
-  },
+  }
+```
+
+or 
+
+```json
+"prometheus": {
+  "enabled": true,
+  "endpoint": "/metrics"
+}
 ```
 
 ### Usage
@@ -53,8 +66,7 @@ Inside ``Startup.cs`` extend ``IConveyBuilder`` with ``AddMetrics()`` and ``IApp
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddMetrics();
 
     //other registrations    

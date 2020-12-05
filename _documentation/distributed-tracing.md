@@ -54,17 +54,17 @@ Once your application produces spans needed for Jaeger, you need to enable repor
 * ``samplingRate`` - determines the percentage of spans to report. Required only for **probabilistic** sampler.
 
 ### appsettings.json
-```js
+```json
 "jaeger": {
-    "enabled": true,
-    "serviceName": "example-service",
-    "udpHost": "localhost",
-    "udpPort": 6831,
-    "maxPacketSize": 0,
-    "sampler": "rate",
-    "maxTracesPerSecond": 10,
-    "samplingRate": 0.0
-  }
+  "enabled": true,
+  "serviceName": "users",
+  "udpHost": "localhost",
+  "udpPort": 6831,
+  "maxPacketSize": 65000,
+  "sampler": "const",
+  "maxTracesPerSecond": 10,
+  "excludePaths": ["/", "/ping", "/metrics"]
+},
 ```
 
 ### Usage
@@ -75,21 +75,11 @@ public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
     services.AddOpenTracing();
 
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddJaeger();
 
     //other registrations    
     return builder.Build();
-}
-```
-
-You can also enable simple ASP.NET Core middleware that will create a span for each incoming HTTP request. Inside your ``Startup.cs`` call ``UseJaeger()`` method on ``IApplicationBuilder``:
-
-```csharp
-public void Configure(this IApplicationBuilder app)
-{
-    app.UseJaeger();
 }
 ```
 

@@ -71,13 +71,30 @@ public class SomeService
 
 ### appsettings.json
 
-```js
+```json
 "logger": {
-  "applicationName": "some-service",
-  "serviceId": "instance-1",
-  "excludePaths": ["/ping", "/metrics"],
+  "level": "information",
+  "excludePaths": ["/", "/ping", "/metrics"],
+  "excludeProperties": [
+    "api_key",
+    "access_key",
+    "ApiKey",
+    "ApiSecret",
+    "ClientId",
+    "ClientSecret",
+    "ConnectionString",
+    "Password",
+    "Email",
+    "Login",
+    "Secret",
+    "Token"
+  ],
   "console": {
     "enabled": true
+  },
+  "elk": {
+    "enabled": false,
+    "url": "http://localhost:9200"
   },
   "file": {
     "enabled": true,
@@ -87,7 +104,8 @@ public class SomeService
   "seq": {
     "enabled": true,
     "url": "http://localhost:5341",
-    "token": "secret"
-  }
-}
+    "apiKey": "secret"
+  },
+  "tags": {}
+},
 ```

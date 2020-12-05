@@ -62,7 +62,7 @@ The core Convey package also registers `AppOptions` type which contains the appl
 
 ### appsettings.json
 
-```js
+```json
 "app": {
   "name": "some service",
   "displayBanner": true

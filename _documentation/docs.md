@@ -33,7 +33,7 @@ Adds API documentation using [Swagger](https://swagger.io/docs/) or [ReDoc](http
 * `IncludeSecurity` - determines whether documentation security (via JWT) is going to be activated 
 
 ## appsettings.json
-```js
+```json
   "swagger": {
     "enabled": true,
     "reDocEnabled": false,
@@ -51,8 +51,7 @@ Inside ``Startup.cs`` extend ``IConveyBuilder`` with ``AddSwaggerDocs()`` and ``
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddSwaggerDocs();
 
     //other registrations    

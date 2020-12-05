@@ -60,8 +60,7 @@ You can easily register all command handlers in DI container by calling ``AddCom
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddCommandHandlers();
 
     //other registrations    
@@ -75,8 +74,7 @@ Dispatching a particular command object can be also done using Convey package. S
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddCommandHandlers()
         .AddInMemoryCommandDispatcher();
 
@@ -139,8 +137,7 @@ You can easily register all query handlers in DI container by calling ``AddQuery
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddQueryHandlers();
 
     //other registrations    
@@ -154,8 +151,7 @@ Dispatching a particular query object can be also done using Convey package. Sta
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddQueryHandlers()
         .AddInMemoryQueryDispatcher();
 
@@ -226,8 +222,7 @@ You can easily register all event handlers in DI container by calling ``AddEvent
 ```csharp
 public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddEventHandlers();
 
     //other registrations    
@@ -243,8 +238,7 @@ public IServiceProvider ConfigureServices(this IServiceCollection services)
 {
     services.AddOpenTracing();
 
-    var builder = ConveyBuilder
-        .Create(services)
+    var builder = services.AddConvey()
         .AddCommandHandlers()
         .AddInMemoryEventDispatcher();
 

@@ -74,7 +74,7 @@ public class SomeService
 
 ### appsettings.json
 
-```js
+```json
 "mongo": {
   "connectionString": "mongodb://localhost:27017",
   "database": "some-service",
@@ -130,7 +130,7 @@ public class SomeService
 
 ### appsettings.json
 
-```js
+```json
 "redis": {
   "connectionString": "localhost",
   "instance": "some-service:"
